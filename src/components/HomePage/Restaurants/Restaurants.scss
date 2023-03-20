@@ -1,0 +1,24 @@
+.restaurants-main {
+  padding: 0px 120px;
+}
+.restaurants-navbar {
+  display: flex;
+  justify-content: space-evenly;
+  height: 80px;
+  background: aqua;
+  //   margin-top: 20px;
+  align-items: center;
+  width: 100%;
+  padding: 20px 24px;
+}
+.resaurants-container {
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: auto auto auto auto;
+}
+.card {
+  height: 100px;
+  width: 200px;
+  background-color: burlywood;
+  margin: 8px;
+}
