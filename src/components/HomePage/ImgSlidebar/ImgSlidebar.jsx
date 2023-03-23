@@ -29,7 +29,7 @@ const ImgSlidebar = ({ images }) => {
     dots: false,
     infinite: false,
     speed: 1000,
-    slidesToShow: 5,
+    slidesToShow: 3,
     slidesToScroll: 1,
     prevArrow: <SampleNextArrow />,
     nextArrow: <SamplePrevArrow />,
@@ -46,6 +46,7 @@ const ImgSlidebar = ({ images }) => {
 
   return (
     // <div className="slider-container">
+
     <Slider {...settings}>
       {images.map((image, index) => (
         <div key={index} className="img">

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getSearchLocations } from "../../api/api";
-import { toggleOpenClose } from "../../slice/locationSidebar";
+import { getLocationDetails, getSearchLocations } from "../../api/api";
+import { toggleOpenClose, setLocation } from "../../slice/locationSidebar";
 import { CiLocationOn } from "react-icons/ci";
 import { BiCurrentLocation } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
@@ -32,6 +32,12 @@ const LocationSidebar = () => {
     } else {
       setValue("");
     }
+  };
+
+  const getLocationData = async (lovationPlaceId) => {
+    const data = await getLocationDetails(lovationPlaceId);
+    dispatch(setLocation(data.data[0].geometry.location));
+    dispatch(toggleOpenClose());
   };
   return (
     <>
@@ -73,7 +79,13 @@ const LocationSidebar = () => {
         {value &&
           searchLocations.length > 0 &&
           searchLocations.map((location, id) => (
-            <div key={location.place_id} className="search-location">
+            <div
+              key={location.place_id}
+              className="search-location"
+              onClick={() => {
+                getLocationData(location.place_id);
+              }}
+            >
               <div className="search-location-icon">
                 <CiLocationOn />
               </div>

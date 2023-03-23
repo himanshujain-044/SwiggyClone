@@ -1,24 +1,65 @@
 .restaurants-main {
-  padding: 0px 120px;
+  //   padding: 0px 250px;
+  //   hr {
+  //     position: relative;
+  //     top: -17px;
+  //     z-index: 1200;
+  //     padding: 0px 8px;
+  //     border: 1px solid #e9e9eb;
+  //   }
+  //   width: 1800px;
+  //   min-width: 1800px;
 }
 .restaurants-navbar {
   display: flex;
-  justify-content: space-evenly;
-  height: 80px;
-  background: aqua;
-  //   margin-top: 20px;
+  justify-content: space-between;
+  height: 72px;
+  background: #ffffff;
+
+  z-index: 1100;
+  position: sticky;
+  top: 0;
   align-items: center;
   width: 100%;
-  padding: 20px 24px;
+  padding: 0px 250px;
+  &__total-count {
+    font-weight: 600;
+    font-size: 28px;
+  }
+  &__content {
+    span {
+      font-size: 16px;
+      font-weight: 300;
+      text-transform: capitalize;
+      color: #686b78;
+      margin-left: 35px;
+      cursor: pointer;
+      position: relative;
+    }
+    span:hover {
+      color: #3d4152;
+    }
+    &--active-menu {
+      color: #3d4152 !important;
+    }
+    &--active-menu:after {
+      position: absolute;
+      content: "";
+      left: 0;
+      right: 0;
+      height: 1px;
+      top: 31px;
+
+      background: #282c3f;
+    }
+  }
 }
 .resaurants-container {
   display: grid;
   justify-content: space-between;
   grid-template-columns: auto auto auto auto;
-}
-.card {
-  height: 100px;
-  width: 200px;
-  background-color: burlywood;
-  margin: 8px;
+  position: relative;
+  //   bottom: 10px;
+  border-top: 1px solid #e9e9eb;
+  padding: 0px 250px;
 }
