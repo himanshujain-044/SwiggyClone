@@ -1,5 +1,7 @@
 import "./App.scss";
+import Footer from "./components/Footer/Footer";
 import HomePage from "./components/HomePage/HomePage";
+import CardSpinner from "./components/LoadingSpinners/CardSpinner/CardSpinner";
 import Navbar from "./components/Navbar/Navbar";
 
 function App() {
@@ -8,7 +10,8 @@ function App() {
       <Navbar />
       <div className="main-container">
         <HomePage />
-        {/* <Footer /> */}
+        {/* <CardSpinner /> */}
+        <Footer />
       </div>
     </>
   );

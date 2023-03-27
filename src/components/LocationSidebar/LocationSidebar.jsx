@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getLocationDetails, getSearchLocations } from "../../api/api";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getLocationDetails,
+  getSearchLocations,
+  getCurrentLocation,
+} from "../../api/api";
 import { toggleOpenClose, setLocation } from "../../slice/locationSidebar";
 import { CiLocationOn } from "react-icons/ci";
 import { BiCurrentLocation } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
 import "./LocationSidebar.scss";
+import { fetchDataAsync } from "../../slice/httpRequest";
 
 const LocationSidebar = () => {
   const dispatch = useDispatch();
   const [value, setValue] = useState("");
   const [searchLocations, setSearchLocations] = useState([]);
-
+  const { data, isLoading } = useSelector((state) => state.httpRequest);
   useEffect(() => {
     async function getSearchLoc() {
       if (value.length > 2) {
@@ -39,6 +44,18 @@ const LocationSidebar = () => {
     dispatch(setLocation(data.data[0].geometry.location));
     dispatch(toggleOpenClose());
   };
+
+  const getCurrentGeoLoc = async () => {
+    dispatch(fetchDataAsync([getCurrentLocation]));
+  };
+
+  if (isLoading) {
+    return <p>Loding</p>;
+  }
+  if (data) {
+    console.log("56", data);
+    // dispatch(setLocation(data.data[0].geometry.location));
+  }
   return (
     <>
       <div className="location-modal">
@@ -104,7 +121,12 @@ const LocationSidebar = () => {
           ))}
 
         {!value && (
-          <div className="current-location">
+          <div
+            className="current-location"
+            onClick={() => {
+              getCurrentGeoLoc();
+            }}
+          >
             <div>
               <BiCurrentLocation />
               {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

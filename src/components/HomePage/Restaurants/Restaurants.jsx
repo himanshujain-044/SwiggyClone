@@ -1,19 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { TbChartCandleFilled } from "react-icons/tb";
 import { getRestaurants } from "../../../api/api";
 import RestaurantCard from "../RestaurantCard/RestaurantCard";
 import "./Restaurants.scss";
+import { fetchDataAsync } from "../../../slice/httpRequest";
+import CardSpinner from "../../LoadingSpinners/CardSpinner/CardSpinner";
 function Restaurants() {
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
+
   const location = useSelector((state) => state.locationSidebar.location);
-  const [restaurantsList, setRestaurantsList] = useState({});
+  const { data, isLoading } = useSelector((state) => state.httpRequest);
+  const restaurantsList = data ? data.data.cards[2].data.data : "";
   const [navMenu, setMenu] = useState([
     { label: "Relevance", active: true },
     { label: "Delivery Time", active: false },
     { label: "Rating", active: false },
     { label: "Cost: Low to High", active: false },
     { label: "Cost: High to Low", active: false },
-    { label: "Filters", active: false },
   ]);
 
   const handleOnMenuChange = (selectedMenuIdx) => {
@@ -25,13 +29,18 @@ function Restaurants() {
       return [...preVal];
     });
   };
+
+  const fetchRestaurants = useCallback(async () => {
+    dispatch(fetchDataAsync([getRestaurants, [location.lat, location.lng]]));
+  }, [dispatch, location]);
   useEffect(() => {
-    async function getRestaurantsData() {
-      const data = await getRestaurants(location.lat, location.lng);
-      setRestaurantsList(data.data.cards[2].data.data);
-    }
-    getRestaurantsData();
-  }, [location]);
+    fetchRestaurants();
+  }, [fetchRestaurants]);
+
+  if (isLoading) {
+    return <CardSpinner />;
+  }
+
   return (
     <div className="restaurants-main">
       <div className="restaurants-navbar">
@@ -52,6 +61,12 @@ function Restaurants() {
               {menu.label}
             </span>
           ))}
+          <span className="restaurants-navbar__content--filter">
+            Filters
+            <span className="restaurants-navbar__content--filter-icon">
+              <TbChartCandleFilled />
+            </span>
+          </span>
         </div>
       </div>
 

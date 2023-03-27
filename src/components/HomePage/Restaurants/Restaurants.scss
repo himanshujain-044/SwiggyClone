@@ -21,7 +21,9 @@
   top: 0;
   align-items: center;
   width: 100%;
-  padding: 0px 250px;
+
+  padding: 0px 305px 0px 275px;
+
   &__total-count {
     font-weight: 600;
     font-size: 28px;
@@ -51,6 +53,26 @@
       top: 31px;
 
       background: #282c3f;
+    }
+    &--filter-icon {
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      position: absolute !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fc8019 !important;
+      border: 1.5px solid #fc8019;
+      left: 51px;
+      margin-left: 0 !important;
+      bottom: -6px;
+    }
+    &--filter {
+      font-weight: 500 !important;
+      &:hover {
+        color: #fc8019 !important;
+      }
     }
   }
 }
