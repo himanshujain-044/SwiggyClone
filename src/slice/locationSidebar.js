@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isLocationbarOpen: false,
+  sidebarType: "",
   location: { lat: 18.5204303, lng: 73.8567437 },
 };
 
@@ -9,7 +10,8 @@ export const locationSidebar = createSlice({
   name: "locationSidebar",
   initialState,
   reducers: {
-    toggleOpenClose: (state) => {
+    toggleOpenClose: (state, action) => {
+      state.sidebarType = action.payload;
       state.isLocationbarOpen = !state.isLocationbarOpen;
     },
     setLocation: (state, actions) => {

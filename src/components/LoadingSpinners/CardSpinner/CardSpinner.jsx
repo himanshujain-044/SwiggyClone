@@ -19,7 +19,7 @@ const CardSpinner = () => {
       <div className="main-cards">
         {arr.map((_, index) => {
           return (
-            <div className="main-cards__card">
+            <div className="main-cards__card" key={index}>
               <div className="main-cards__card--upper"></div>
               <div className="main-cards__card--middle"></div>
               <div className="main-cards__card--lower"></div>

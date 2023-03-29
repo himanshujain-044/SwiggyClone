@@ -12,12 +12,13 @@
 .location-modal {
   position: fixed;
   top: 0;
+  // right: 0;
   width: 550px;
   height: 100vh;
   z-index: 100003;
   background: #ffffff;
   padding: 24px 32px 0px 25px;
-  animation: animation 0.5s;
+  animation: left-animation 0.5s;
   .cancel-icon {
     svg {
       width: 25px;
@@ -143,11 +144,25 @@
   }
 }
 
-@keyframes animation {
+.right-sidebar {
+  animation: right-animation 0.5s !important;
+  right: 0;
+}
+
+@keyframes left-animation {
   from {
     transform: translateX(-100%);
   }
   to {
     transform: translateX(0);
+  }
+}
+
+@keyframes right-animation {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0%);
   }
 }

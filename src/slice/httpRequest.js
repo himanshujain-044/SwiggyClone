@@ -12,6 +12,7 @@ const initialState = {
 export const fetchDataAsync = createAsyncThunk(
   "data/fetchData",
   async (fetchData) => {
+    console.log("http Req", fetchData);
     //   fetchData[0]-function name passed which is making an api call,fetchData[1] data if need to pass in fnc
     const response = await fetchData[0](...fetchData[1]);
     return response;
@@ -21,7 +22,13 @@ export const fetchDataAsync = createAsyncThunk(
 export const httpRequest = createSlice({
   name: "data",
   initialState,
-  reducers: {},
+  reducers: {
+    setInitialState: (state, action) => {
+      console.log("26 cleaning the store data");
+      state.data = null;
+      state.isLoading = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchDataAsync.pending, (state) => {
@@ -39,6 +46,10 @@ export const httpRequest = createSlice({
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
+      })
+      .addDefaultCase((state) => {
+        state.data = null;
+        state.isLoading = false;
       });
   },
 });
@@ -49,3 +60,4 @@ export const selectIsSuccess = (state) => state.data.isSuccess;
 export const selectIsError = (state) => state.data.isError;
 
 export default httpRequest.reducer;
+export const { setInitialState } = httpRequest.actions;

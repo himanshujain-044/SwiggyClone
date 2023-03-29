@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { AiFillStar } from "react-icons/ai";
 import { BsDot } from "react-icons/bs";
 import { TbDiscount2 } from "react-icons/tb";
 import { GoTriangleLeft } from "react-icons/go";
-import { useDispatch, useSelector } from "react-redux";
-import { getRestaurants } from "../../../api/api";
+// import { useDispatch, useSelector } from "react-redux";
+// import { getRestaurants } from "../../../api/api";
 import "./RestaurantCard.scss";
 function RestaurantCard({ data }) {
-  console.log("7", data.data.cloudinaryImageId);
   return (
     <div className="card">
       <img

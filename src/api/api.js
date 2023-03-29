@@ -51,5 +51,14 @@ export const getCurrentLocation = async () => {
   }
 };
 
-// // place_id
-// https://www.swiggy.com/dapi/misc/address-recommend?place_id=ChIJr5H1LErReDkRcBMotaLqRvQ
+export const getSearchData = async (lat, lng, searchVal, trackingId = null) => {
+  try {
+    const res = await axios.get(
+      `${process.env.REACT_APP_API_BASE_URL}restaurants/search/suggest?lat=${lat}&lng=${lng}&str=${searchVal}&trackingId=${trackingId}`
+    );
+    return res.data;
+  } catch (e) {
+    console.log(e);
+    return e;
+  }
+};
